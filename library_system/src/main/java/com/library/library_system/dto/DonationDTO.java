@@ -10,7 +10,7 @@ public class DonationDTO {
     private Long userId;
     private String bookTitle;
     private String author;
-    private String condition; // NEW, LIKE_NEW, USED
+    private String bookCondition; // NEW, LIKE_NEW, USED
     private String status;    // PENDING, APPROVED, REJECTED
     private LocalDate donationDate;
 }

@@ -6,5 +6,5 @@ import lombok.Data;
 public class SubmitDonationDTO {
     private String bookTitle;
     private String author;
-    private String condition;
+    private String bookCondition;
 }
