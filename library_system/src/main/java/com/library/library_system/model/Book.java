@@ -1,7 +1,6 @@
 package com.library.library_system.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
