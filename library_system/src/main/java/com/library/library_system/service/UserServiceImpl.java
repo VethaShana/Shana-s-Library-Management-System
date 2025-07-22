@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setRole("USER");
         user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
 
         User savedUser = userRepository.save(user);
         return modelMapper.map(savedUser, UserDTO.class);
@@ -43,11 +44,11 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(loginDTO.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-//        if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
-//            throw new RuntimeException("Invalid credentials");
-//        }
-//
-//        return jwtService.generateToken(user);
+        if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        //return jwtService.generateToken(user);
         return "Successfully Logged In!";
     }
 
