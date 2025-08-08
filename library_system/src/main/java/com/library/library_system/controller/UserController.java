@@ -23,14 +23,14 @@ public class UserController {
     private final UserService userService;
 
     // 📝 Register a new user
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     public ResponseEntity<UserDTO> registerUser(@RequestBody @Valid UserRegisterDTO registerDTO) {
         UserDTO userDTO = userService.register(registerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
     }
 
     // 🔐 Login and receive JWT
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody @Valid UserLoginDTO loginDTO) {
         String token = userService.login(loginDTO);
         Map<String, String> response = new HashMap<>();
