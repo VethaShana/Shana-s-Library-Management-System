@@ -20,10 +20,11 @@ function Login() {
 
   return (
     <div className="container">
+
       <div className="top-bar">
         <header className="header">Shana’s Library</header>
       </div>
-      
+
       {showAlert && (
         <div className="alert">
           <span>ℹ️ Hi {username}!</span>
@@ -31,7 +32,7 @@ function Login() {
           <button onClick={() => setShowAlert(false)}>Ok</button>
         </div>
       )}
-
+      
       <div className="welcome-box">
         <h4>
           Welcome To <br />
@@ -82,7 +83,7 @@ function Login() {
         </div>
 
         <p className="register-text">
-          Don’t have any account ? <button className="register-btn">Register</button>
+          Don’t you have any account ? <button className="register-btn">Register</button>
         </p>
       </div>
     </div>
