@@ -1,38 +1,49 @@
-// src/components/Login.jsx
-import { useState } from 'react'
-import './Login.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [showAlert, setShowAlert] = useState(false)
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username && password) {
-      setShowAlert(true)
+      setShowAlert(true);
     }
-  }
+  };
 
   const handleClear = () => {
-    setUsername('')
-    setPassword('')
-  }
+    setUsername("");
+    setPassword("");
+  };
+
+  const handleSuccess = () => {
+    setShowAlert(false);
+    navigate("/home");
+  };
 
   return (
     <div className="container">
-
       <div className="top-bar">
         <header className="header">Shana’s Library</header>
       </div>
 
       {showAlert && (
-        <div className="alert">
-          <span>ℹ️ Hi {username}!</span>
-          <p>Login Successful…</p>
-          <button onClick={() => setShowAlert(false)}>Ok</button>
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Login Successful</h3>
+            <p>Hi {username}, welcome to Shana’s Library!</p>
+
+            <button className="ok-btn" onClick={handleSuccess}>
+              OK
+            </button>
+          </div>
         </div>
       )}
-      
+
       <div className="welcome-box">
         <h4>
           Welcome To <br />
@@ -72,7 +83,7 @@ function Login() {
             )}
           </div>
 
-        <div className="button-row">
+          <div className="button-row">
             <button className="login-btn" onClick={handleLogin}>
               Login
             </button>
@@ -83,11 +94,12 @@ function Login() {
         </div>
 
         <p className="register-text">
-          Don’t you have any account ? <button className="register-btn">Register</button>
+          Don’t you have any account?{" "}
+          <button className="register-btn">Register</button>
         </p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
