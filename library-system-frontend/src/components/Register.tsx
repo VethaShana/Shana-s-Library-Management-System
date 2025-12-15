@@ -1,27 +1,50 @@
-// src/components/Register.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // reuse same CSS
+import "./Login.css";
 
 function Register() {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const handleRegister = () => {
-    if (username && email && password) {
-      alert("Registration Successful!");
-      navigate("/"); // back to login
+  // Dynamic password match check
+  useEffect(() => {
+    if (confirmPassword && password !== confirmPassword) {
+      setError("Passwords do not match");
+    } else {
+      setError("");
     }
+  }, [password, confirmPassword]);
+
+  const handleRegister = () => {
+    if (!username || !email || !password || !confirmPassword) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setError("");
+    alert("Registration Successful!");
+    navigate("/");
   };
 
   const handleClear = () => {
     setUsername("");
     setEmail("");
     setPassword("");
+    setConfirmPassword("");
+    setError("");
   };
+
+  const passwordError = confirmPassword && password !== confirmPassword;
 
   return (
     <>
@@ -47,11 +70,6 @@ function Register() {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter username"
               />
-              {username && (
-                <button className="clear-btn" onClick={() => setUsername("")}>
-                  ×
-                </button>
-              )}
             </div>
 
             <div className="input-group">
@@ -62,11 +80,6 @@ function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
               />
-              {email && (
-                <button className="clear-btn" onClick={() => setEmail("")}>
-                  ×
-                </button>
-              )}
             </div>
 
             <div className="input-group">
@@ -76,18 +89,57 @@ function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create password"
+                style={{
+                  borderColor: passwordError ? "red" : "#ccc",
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                }}
               />
-              {password && (
-                <button className="clear-btn" onClick={() => setPassword("")}>
-                  ×
-                </button>
-              )}
             </div>
 
+            <div className="input-group">
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Re-enter password"
+                style={{
+                  borderColor: passwordError ? "red" : "#ccc",
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                }}
+              />
+            </div>
+
+            {/* Error message */}
+            {error && (
+              <p style={{ color: "red", fontSize: "13px", marginBottom: "10px" }}>
+                {error}
+              </p>
+            )}
+
             <div className="button-row">
-              <button className="login-btn" onClick={handleRegister}>
+              <button
+                className="login-btn"
+                onClick={handleRegister}
+                disabled={
+                  (!username || !email || !password || !confirmPassword || passwordError) as boolean
+                }
+                style={{
+                  opacity:
+                    !username || !email || !password || !confirmPassword || passwordError
+                      ? 0.6
+                      : 1,
+                  cursor:
+                    !username || !email || !password || !confirmPassword || passwordError
+                      ? "not-allowed"
+                      : "pointer",
+                }}
+              >
                 Register
               </button>
+
               <button className="clear-btn2" onClick={handleClear}>
                 Clear
               </button>
@@ -96,10 +148,7 @@ function Register() {
 
           <p className="register-text">
             Already have an account?{" "}
-            <button
-              className="register-btn"
-              onClick={() => navigate("/")}
-            >
+            <button className="register-btn" onClick={() => navigate("/")}>
               Login
             </button>
           </p>
