@@ -1,59 +1,43 @@
+// src/components/Register.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./Login.css"; // reuse same CSS
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (username && password) {
-      setShowAlert(true);
+  const handleRegister = () => {
+    if (username && email && password) {
+      alert("Registration Successful!");
+      navigate("/"); // back to login
     }
   };
 
   const handleClear = () => {
     setUsername("");
+    setEmail("");
     setPassword("");
-  };
-
-  const handleSuccess = () => {
-    setShowAlert(false);
-    navigate("/home");
   };
 
   return (
     <>
       <div className="top-bar">
-          <header className="header">Shana’s Library</header>
+        <header className="header">Shana’s Library</header>
       </div>
-      
-      {showAlert && (
-          <div className="modal-overlay">
-            <div className="modal-box">
-              <h3>Login Successful</h3>
-              <p>Hi {username}, welcome to Shana’s Library!</p>
-
-              <button className="ok-btn" onClick={handleSuccess}>
-                OK
-              </button>
-            </div>
-          </div>
-        )}
 
       <div className="container">
-
         <div className="welcome-box">
           <h4>
-            Welcome To <br />
+            Create Account <br />
             <span>Shana’s Library</span>
           </h4>
 
           <div className="login-box">
-            <h4>Login using your credentials</h4>
+            <h4>Register using your details</h4>
 
             <div className="input-group">
               <label>Username</label>
@@ -71,12 +55,27 @@ function Login() {
             </div>
 
             <div className="input-group">
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
+              />
+              {email && (
+                <button className="clear-btn" onClick={() => setEmail("")}>
+                  ×
+                </button>
+              )}
+            </div>
+
+            <div className="input-group">
               <label>Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
+                placeholder="Create password"
               />
               {password && (
                 <button className="clear-btn" onClick={() => setPassword("")}>
@@ -86,8 +85,8 @@ function Login() {
             </div>
 
             <div className="button-row">
-              <button className="login-btn" onClick={handleLogin}>
-                Login
+              <button className="login-btn" onClick={handleRegister}>
+                Register
               </button>
               <button className="clear-btn2" onClick={handleClear}>
                 Clear
@@ -96,9 +95,12 @@ function Login() {
           </div>
 
           <p className="register-text">
-            Don’t you have any account?{" "}
-            <button className="register-btn" onClick={() => navigate("/register")}>
-              Register
+            Already have an account?{" "}
+            <button
+              className="register-btn"
+              onClick={() => navigate("/")}
+            >
+              Login
             </button>
           </p>
         </div>
@@ -107,4 +109,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
