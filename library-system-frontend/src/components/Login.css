@@ -1,14 +1,24 @@
 /* src/components/Login.css */
   body {
-    margin: 0;
-    font-family: sans-serif;
-    background-image: url("../assets/Booksbg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: rgb(0, 183, 3);
-  }
+  margin: 0;
+  font-family: sans-serif;
+
+  background-image: url("../assets/Booksbg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* ✅ TRUE CENTERING */
+  display: grid;
+  place-items: center;
+
+  /* push content below fixed header */
+  padding-top: 80px;
+
+  min-height: 100vh;
+}
+
   
    .top-bar {
       width: 100%;
@@ -27,11 +37,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-    text-align: center;
-    padding: 1rem;
+
+    height: calc(100vh - 70px);
+    margin-top: 70px;
   }
+
   
   .header {
     font-size: 2rem;
@@ -41,12 +51,12 @@
   }
   
   .welcome-box {
-  background: #a4f0c2;
-  padding: 15px;
-  border-radius: 12px;
-  width: 400px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background: #a4f0c2;
+    padding: 15px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   .welcome-box h4 {
