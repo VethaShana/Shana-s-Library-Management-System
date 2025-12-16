@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = new User();
-        user.setName(registerDTO.getName());
+        user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         //user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setPassword(registerDTO.getPassword());
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        return jwtService.generateToken(user.getName(),user.getRoles());
+        return jwtService.generateToken(user.getUsername(),user.getRoles());
 
     }
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authService";
 import "./Login.css";
 
 function Login() {
@@ -9,9 +10,15 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (username && password) {
-      setShowAlert(true);
+  const handleLogin = async () => {
+    if (!username || !password) return;
+
+    try {
+      const res = await loginUser({ username, password });
+      setUsername(res.data.username);
+      setShowAlert(true); // login success modal
+    } catch {
+      alert("Invalid email or password");
     }
   };
 
@@ -35,7 +42,7 @@ function Login() {
           <div className="modal-overlay">
             <div className="modal-box">
               <h3>Login Successful</h3>
-              <p>Hi {username}, welcome to Shana’s Library!</p>
+              <p>Hi, welcome to Shana’s Library!</p>
 
               <button className="ok-btn" onClick={handleSuccess}>
                 OK
@@ -56,12 +63,12 @@ function Login() {
             <h4>Login using your credentials</h4>
 
             <div className="input-group">
-              <label>Username</label>
+              <label>User Email</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username"
+                placeholder="Enter email"
               />
               {username && (
                 <button className="clear-btn" onClick={() => setUsername("")}>
