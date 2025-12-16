@@ -4,18 +4,17 @@ import { loginUser } from "../services/authService";
 import "./Login.css";
 
 function Login() {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!username || !password) return;
+    if (!email || !password) return;
 
     try {
-      const res = await loginUser({ username, password });
-      setUsername(res.data.username);
+      await loginUser({ email, password });
       setShowAlert(true); // login success modal
     } catch {
       alert("Invalid email or password");
@@ -23,7 +22,7 @@ function Login() {
   };
 
   const handleClear = () => {
-    setUsername("");
+    setEmail("");
     setPassword("");
   };
 
@@ -35,24 +34,23 @@ function Login() {
   return (
     <>
       <div className="top-bar">
-          <header className="header">Shana’s Library</header>
+        <header className="header">Shana’s Library</header>
       </div>
-      
-      {showAlert && (
-          <div className="modal-overlay">
-            <div className="modal-box">
-              <h3>Login Successful</h3>
-              <p>Hi, welcome to Shana’s Library!</p>
 
-              <button className="ok-btn" onClick={handleSuccess}>
-                OK
-              </button>
-            </div>
+      {showAlert && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Login Successful</h3>
+            <p>Hi, welcome to Shana’s Library!</p>
+
+            <button className="ok-btn" onClick={handleSuccess}>
+              OK
+            </button>
           </div>
-        )}
+        </div>
+      )}
 
       <div className="container">
-
         <div className="welcome-box">
           <h4>
             Welcome To <br />
@@ -65,13 +63,13 @@ function Login() {
             <div className="input-group">
               <label>User Email</label>
               <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
               />
-              {username && (
-                <button className="clear-btn" onClick={() => setUsername("")}>
+              {email && (
+                <button className="clear-btn" onClick={() => setEmail("")}>
                   ×
                 </button>
               )}
