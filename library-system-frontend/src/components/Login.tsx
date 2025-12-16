@@ -1,22 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authService";
 import "./Login.css";
 
 function Login() {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (username && password) {
-      setShowAlert(true);
+  const handleLogin = async () => {
+    if (!email || !password) return;
+
+    try {
+      await loginUser({ email, password });
+      setShowAlert(true); // login success modal
+    } catch {
+      alert("Invalid email or password");
     }
   };
 
   const handleClear = () => {
-    setUsername("");
+    setEmail("");
     setPassword("");
   };
 
@@ -28,24 +34,23 @@ function Login() {
   return (
     <>
       <div className="top-bar">
-          <header className="header">Shana’s Library</header>
+        <header className="header">Shana’s Library</header>
       </div>
-      
-      {showAlert && (
-          <div className="modal-overlay">
-            <div className="modal-box">
-              <h3>Login Successful</h3>
-              <p>Hi {username}, welcome to Shana’s Library!</p>
 
-              <button className="ok-btn" onClick={handleSuccess}>
-                OK
-              </button>
-            </div>
+      {showAlert && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Login Successful</h3>
+            <p>Hi, welcome to Shana’s Library!</p>
+
+            <button className="ok-btn" onClick={handleSuccess}>
+              OK
+            </button>
           </div>
-        )}
+        </div>
+      )}
 
       <div className="container">
-
         <div className="welcome-box">
           <h4>
             Welcome To <br />
@@ -56,15 +61,15 @@ function Login() {
             <h4>Login using your credentials</h4>
 
             <div className="input-group">
-              <label>Username</label>
+              <label>User Email</label>
               <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
               />
-              {username && (
-                <button className="clear-btn" onClick={() => setUsername("")}>
+              {email && (
+                <button className="clear-btn" onClick={() => setEmail("")}>
                   ×
                 </button>
               )}

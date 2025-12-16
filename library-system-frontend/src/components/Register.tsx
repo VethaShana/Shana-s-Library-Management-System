@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import { registerUser } from "../services/authService";
+import "./Register.css";
 
 function Register() {
   const [username, setUsername] = useState<string>("");
@@ -22,7 +23,7 @@ function Register() {
     }
   }, [password, confirmPassword]);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!username || !email || !password || !confirmPassword) {
       setError("All fields are required");
       return;
@@ -33,8 +34,17 @@ function Register() {
       return;
     }
 
-    setError("");
-    setShowSuccess(true);
+  try {
+      await registerUser({
+        username,
+        email,
+        password,
+      });
+
+      setShowSuccess(true); // your modal
+    } catch (err: any) {
+      setError(err.response?.data || "Registration failed");
+    }
   };
 
   const handleClear = () => {
