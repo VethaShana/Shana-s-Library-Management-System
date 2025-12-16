@@ -7,11 +7,13 @@ function Register() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+
   const [error, setError] = useState<string>("");
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  // Dynamic password match check
+  // Live password match validation
   useEffect(() => {
     if (confirmPassword && password !== confirmPassword) {
       setError("Passwords do not match");
@@ -32,8 +34,7 @@ function Register() {
     }
 
     setError("");
-    alert("Registration Successful!");
-    navigate("/");
+    setShowSuccess(true);
   };
 
   const handleClear = () => {
@@ -44,14 +45,35 @@ function Register() {
     setError("");
   };
 
+  const handleSuccess = () => {
+    setShowSuccess(false);
+    navigate("/");
+  };
+
   const passwordError = confirmPassword && password !== confirmPassword;
 
   return (
     <>
+      {/* Header */}
       <div className="top-bar">
         <header className="header">Shana’s Library</header>
       </div>
 
+      {/* Success Modal */}
+      {showSuccess && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Registration Successful</h3>
+            <p>Hi {username}, your account has been created!</p>
+
+            <button className="ok-btn" onClick={handleSuccess}>
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Registration Form */}
       <div className="container">
         <div className="welcome-box">
           <h4>
@@ -112,7 +134,7 @@ function Register() {
               />
             </div>
 
-            {/* Error message */}
+            {/* Error Message */}
             {error && (
               <p style={{ color: "red", fontSize: "13px", marginBottom: "10px" }}>
                 {error}
@@ -124,15 +146,27 @@ function Register() {
                 className="login-btn"
                 onClick={handleRegister}
                 disabled={
-                  (!username || !email || !password || !confirmPassword || passwordError) as boolean
+                  !username ||
+                  !email ||
+                  !password ||
+                  !confirmPassword ||
+                  !!passwordError
                 }
                 style={{
                   opacity:
-                    !username || !email || !password || !confirmPassword || passwordError
+                    !username ||
+                    !email ||
+                    !password ||
+                    !confirmPassword ||
+                    !!passwordError
                       ? 0.6
                       : 1,
                   cursor:
-                    !username || !email || !password || !confirmPassword || passwordError
+                    !username ||
+                    !email ||
+                    !password ||
+                    !confirmPassword ||
+                    !!passwordError
                       ? "not-allowed"
                       : "pointer",
                 }}
