@@ -1,0 +1,73 @@
+/* ---------------- HEADER ---------------- */
+.home-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #24914f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  z-index: 1000;
+}
+
+/* Left side */
+.header-left h1 {
+  color: #0f2e1e;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Right side */
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-right: 35px;
+}
+
+
+/* Profile */
+.profile-area {
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Dropdown */
+.profile-menu {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 180px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* Dropdown buttons */
+.profile-menu button {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.profile-menu button:hover {
+  background: #e6f7ee;
+}
+
+.logout {
+  color: red;
+}
