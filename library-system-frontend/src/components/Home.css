@@ -1,0 +1,61 @@
+/* ---------------- PAGE LAYOUT ---------------- */
+
+.home-body {
+  display: flex;
+  margin-top: 80px; /* space for fixed header */
+  padding: 20px 30px;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+
+.sidebar {
+  width: 220px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 14px;
+  height: fit-content;
+}
+
+/* ---------------- MAIN CONTENT ---------------- */
+
+.content {
+  flex: 1;
+  margin-left: 30px; /* 👈 moves content away from sidebar */
+  max-width: 1100px; /* 👈 keeps content centered */
+}
+
+/* Subtitle */
+.subtitle {
+  margin-bottom: 15px;
+  opacity: 0.85;
+}
+
+/* ---------------- CARDS ---------------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Individual card */
+.info-card {
+  background: white;
+  color: #111;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.info-card h4 {
+  margin-bottom: 8px;
+}
+
+.info-card p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.info-card button {
+  margin-top: 12px;
+}
