@@ -55,6 +55,7 @@
 /* Text section */
 .about-text {
   flex: 1;
+  color: #000;
 }
 
 .about-text h3 {
