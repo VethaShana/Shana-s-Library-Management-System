@@ -1,0 +1,87 @@
+:root {
+  --header-height: 70px;
+}
+
+/* Page wrapper */
+.page {
+  min-height: 100vh;
+}
+
+/* Layout: Sidebar + Content */
+.layout {
+  display: flex;
+  margin-top: var(--header-height); /* prevents header overlap */
+  padding: 30px;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* Sidebar spacing handled in sidebar.css */
+/* Just ensure sidebar uses:
+   top: 70px;
+   height: calc(100vh - 70px);
+*/
+
+/* Main content */
+.about-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Title */
+.about-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.divider {
+  border: none;
+  height: 2px;
+  background: #222;
+  margin-bottom: 25px;
+}
+
+/* Card layout */
+.about-card {
+  display: flex;
+  gap: 40px;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  align-items: center;
+}
+
+/* Text section */
+.about-text {
+  flex: 1;
+}
+
+.about-text h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.subheading {
+  font-weight: 600;
+  color: #24914f;
+  margin-bottom: 15px;
+}
+
+/* Image section */
+.about-image {
+  flex: 1;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* 🔥 Responsive */
+@media (max-width: 900px) {
+  .about-card {
+    flex-direction: column;
+  }
+}
