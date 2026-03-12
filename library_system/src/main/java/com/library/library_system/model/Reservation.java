@@ -1,9 +1,8 @@
 package com.library.library_system.model;
 
+import com.library.library_system.enum_files.ReservationStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -11,20 +10,24 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "reservations")
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book;
 
     private LocalDate reservationDate;
 
     private LocalDate returnDate;
 
-    private String status; // ACTIVE, COMPLETED, CANCELED
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 }
 
