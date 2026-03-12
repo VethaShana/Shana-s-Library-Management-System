@@ -1,9 +1,33 @@
-.categories-content {
-  flex: 1;
+:root {
+  --header-height: 70px;
 }
 
+/* Page wrapper */
+.page {
+  min-height: 100vh;
+}
+
+/* Layout: Sidebar + Content */
+.layout {
+  display: flex;
+  margin-top: var(--header-height); /* prevents header overlap */
+  padding: 30px;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* ---------------- Categories Content ---------------- */
+.categories-content {
+  flex: 1;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Page title and divider */
 .page-title {
   font-size: 28px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -14,14 +38,13 @@
   margin-bottom: 25px;
 }
 
-/* Category list */
+/* ---------------- Category Cards ---------------- */
 .category-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Card */
 .category-card {
   display: flex;
   gap: 20px;
@@ -32,22 +55,34 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
-/* Icon */
+/* Icon styling */
 .category-icon {
-  font-size: 24px;
+  font-size: 28px;
+  flex-shrink: 0;
+  margin-top: 4px; /* small vertical adjustment */
 }
 
-/* Text */
+/* Text inside card */
+.category-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .category-text h3 {
-  margin-bottom: 5px;
+  color: #666;
+  margin: 0 0 5px 0;
+  font-size: 20px;
 }
 
 .category-text p {
   color: #666;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  line-height: 1.4;
 }
 
-/* Button */
+/* Button inside card */
 .category-btn {
   padding: 8px 14px;
   border: none;
@@ -55,6 +90,8 @@
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.2s ease;
 }
 
 .category-btn:hover {
