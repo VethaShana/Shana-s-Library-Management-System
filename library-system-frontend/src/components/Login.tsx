@@ -14,7 +14,9 @@ function Login() {
     if (!email || !password) return;
 
     try {
-      await loginUser({ email, password });
+      const response = await loginUser({ email, password });
+      // Save token
+      localStorage.setItem("token", response.data.token);
       setShowAlert(true); // login success modal
     } catch {
       alert("Invalid email or password");
