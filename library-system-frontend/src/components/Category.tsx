@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { getCategories } from "../services/categoryService";
-import "./Categories.css";
+import "./Category.css";
 
 interface Category {
   id: number;
