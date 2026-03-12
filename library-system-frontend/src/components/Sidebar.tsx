@@ -6,7 +6,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       <Link to="/home"><button>Home</button></Link>
       <Link to="/about"><button>About</button></Link>
-      <button>Categories</button>
+      <Link to="/categories"><button>Categories</button></Link>
 
       <hr />
 
